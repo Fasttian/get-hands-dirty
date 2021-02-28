@@ -33,32 +33,35 @@
             this.data = null;
         }
         render() {
-            for(let d of data) {
+            for(let d of this.data) {
                 let e = document.createElement("img");
                 e.src = d;
                 this._container.appendChild(e);
             };
             let children = Array.prototype.slice.call(container.children);
             let position = 0;
-            let transform = 0;
             let nextFrame = () => {
                 let nextPosition = position + 1;
-                transform += 100;
                 nextPosition = nextPosition % children.length;
-                let current = children[position];
-                let next = children[nextPosition];
-                
+                let current = children[position],
+                    next = children[nextPosition];
+                // 把 next 挪到右侧第二的位置
                 next.style.transform = 'ease 0s';
-                next.style.transform = `translate(${-100 * transform})`;
+                next.style.transform = `translate(${100 - 100 * nextPosition}%)`;
+
+                setTimeout(() => {
+                    // 把 current 挪出视口
+                    current.style.transition = "";
+                    next.style.transition = "";
+                    current.style.transform = `translate(${- 100 - 100 * position}%)`;
+                    // 把 next 挪进视口
+                    next.style.transform = `translate(${- 100 * nextPosition}%)`;
+                    position = nextPosition;
+                }, 16);
                 
-
-
-                // for (let child of children) {
-                //     child.style.transform = `translate(${-100 * position}%)`
-                // }
-                this.handler = setTimeout(nextFrame, 2000);
+                setTimeout(nextFrame, 3000);
             };
-            this.handler = setTimeout(nextFrame, 2000);
+            setTimeout(nextFrame, 3000);
         }
     }
 
