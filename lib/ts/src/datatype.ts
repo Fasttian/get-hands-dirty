@@ -20,9 +20,10 @@ let compute: (x: number, y: number) => number
 compute = (a, b) => a + b
 
 // 函数怎么声明 ？
-// function(x: number, y: number) {
-//     return x + y
-// }
+function add1(x: number, y: number) {
+    return x + y
+}
+// console.log(add1(2,4))
 
 // symbol
 let s1:symbol = Symbol()
@@ -31,7 +32,7 @@ let s2 = Symbol()
 // undefined, null
 let un: undefined = undefined
 let nu: null = null
-console.log(un === void 0)
+// console.log(un === void 0)
 num = un
 num = null
 
