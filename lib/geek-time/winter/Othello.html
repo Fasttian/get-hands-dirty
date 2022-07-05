@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>黑白棋</title>
+    <style>
+      .check {
+        width: 50px;
+        height: 50px;
+        background-color: green;
+        border: 1px solid #fff;
+        box-sizing: border-box;
+      }
+
+      .flex-common {
+        width: 400px;
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .black-chess {
+        width: 40px;
+        height: 40px;
+        margin: 5px;
+        border-radius: 50%;
+        background-color: black;
+      }
+
+      .white-chess {
+        width: 40px;
+        height: 40px;
+        margin: 5px;
+        border-radius: 50%;
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- UI -->
+    <div id="container" class="flex-common"></div>
+    <!-- logic -->
+    <script>
+      // document.body.onload = createBoard;
+
+          let checkerboard = [
+            [0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0],
+            [0,0,0,1,2,0,0,0,0],
+            [0,0,0,2,1,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0],
+          ];
+      container.innerHTML = '',
+      createBoard();
+
+      function createBoard () {
+
+          for (let y=0; y<8; y++) {
+            for (let x=0; x<8; x++) {
+
+              let check = document.createElement('div');
+              check.className='check';
+
+              check.addEventListener('click', event => {
+                console.log(x,y);
+                let = [i,j] = [x,y]
+                let canMove = false;
+                while ( --i >= 0) {
+                  // console.log('in while',checkerboard[i][j] )
+
+                  if ( checkerboard[i][j] == 2) {
+                    // console.log('checkerboard[i][j]',checkerboard[i][j])
+                    canMove = true;
+                  } else if (checkerboard[i][j] == 1) {
+                    // console.log('checkerboard[i][j]',checkerboard[i][j])
+                    break;
+                  } else {
+                    break;
+                  }
+                };
+                console.log('while' , canMove);
+
+
+                if (i < 0) {
+                  canMove = false;
+                }
+
+                while (canMove && ++i <= x){
+                    console.log('in change');
+
+                    checkerboard[i][j] = 1;
+                    console.log(checkerboard[i][j]);
+                  }
+                  // container.removeChild(container.childNodes);
+
+                  createBoard();
+                  console.log('checkerboard',checkerboard)
+
+
+              })
+
+              if (checkerboard[x][y] == 1) {
+                let disc = document.createElement('div');
+                disc.className = 'black-chess';
+
+                check.appendChild(disc);
+              };
+
+              if (checkerboard[x][y] == 2) {
+                let disc = document.createElement('div');
+                disc.className = 'white-chess';
+
+                check.appendChild(disc);
+              };
+
+              let container = document.getElementById('container');
+              container.appendChild(check);
+
+            }
+          };
+      }
+    </script>
+  </body>
+</html>

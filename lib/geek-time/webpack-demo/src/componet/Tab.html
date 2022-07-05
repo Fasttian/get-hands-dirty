@@ -1,0 +1,21 @@
+<div id="tab">
+  
+</div>
+
+<script>
+  let root = document.getElementById('tab');
+  let nav = document.createElement('ul');
+  let tabContainer = document.createElement('div')
+  for (let i=0; i<3; i++){
+    let navItem = document.createElement('li');
+    // navItem.innerText('nav');
+    nav.appendChild(navItem)
+  }
+  for (let i=0; i<3; i++){
+    let tab = document.createElement('div')
+    // navItem.innerText('nav');
+    tabContainer.appendChild(tab);
+  }
+  root.appendChild(nav);
+  root.appendChild(tabContainer);
+</script>
