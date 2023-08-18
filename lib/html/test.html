@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Gradient Example</title>
+  <style>
+    .gradient-text {
+      position: relative;
+      font-size: 36px;
+      font-weight: bold;
+      overflow: hidden;
+      display: inline-block;
+    }
+
+    .gradient-text::before {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: linear-gradient(180deg, #0041e8 0%, #0078e8 100%);
+      -webkit-background-clip: text; /* Safari/Chrome specific */
+      color: transparent;
+    }
+  </style>
+</head>
+<body>
+  <span class="gradient-text" data-text="Text Gradient">data-text=""</span>
+</body>
+</html>
