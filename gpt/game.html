@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CodeQuest - 迷宫游戏示例</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <script>
+      // 获取Canvas和上下文
+      const canvas = document.getElementById("gameCanvas");
+      const ctx = canvas.getContext("2d");
+
+      // 定义迷宫地图
+      const maze = [
+        [1, 1, 1, 1, 1],
+        [1, 0, 1, 0, 1],
+        [1, 0, 0, 0, 1],
+        [1, 0, 1, 0, 1],
+        [1, 1, 1, 1, 1],
+      ];
+
+      // 玩家角色
+      const player = {
+        x: 1,
+        y: 1,
+        size: 20,
+        color: "red",
+      };
+
+      // 绘制迷宫和玩家角色
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // 绘制迷宫
+        for (let row = 0; row < maze.length; row++) {
+          for (let col = 0; col < maze[row].length; col++) {
+            if (maze[row][col] === 1) {
+              ctx.fillStyle = "gray";
+            } else {
+              ctx.fillStyle = "white";
+            }
+            ctx.fillRect(
+              col * player.size,
+              row * player.size,
+              player.size,
+              player.size
+            );
+          }
+        }
+
+        // 绘制玩家角色
+        ctx.fillStyle = player.color;
+        ctx.fillRect(
+          player.x * player.size,
+          player.y * player.size,
+          player.size,
+          player.size
+        );
+      }
+
+      // 键盘控制玩家移动
+      document.addEventListener("keydown", function (event) {
+        const key = event.key;
+        switch (key) {
+          case "ArrowUp":
+            if (maze[player.y - 1][player.x] === 0) {
+              player.y--;
+            }
+            break;
+          case "ArrowDown":
+            if (maze[player.y + 1][player.x] === 0) {
+              player.y++;
+            }
+            break;
+          case "ArrowLeft":
+            if (maze[player.y][player.x - 1] === 0) {
+              player.x--;
+            }
+            break;
+          case "ArrowRight":
+            if (maze[player.y][player.x + 1] === 0) {
+              player.x++;
+            }
+            break;
+          default:
+            break;
+        }
+        draw();
+      });
+
+      // 初始化绘制
+      draw();
+    </script>
+  </body>
+</html>
